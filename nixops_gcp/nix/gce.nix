@@ -1,9 +1,9 @@
 # Configuration specific to the Google Compute Engine backend.
 
-{ config, lib, pkgs, name, uuid, resources, ... }:
+{ config, lib, modulesPath, pkgs, name, uuid, resources, ... }:
 
 with lib;
-with import <nixops/lib.nix> lib;
+with import ./lib.nix lib;
 
 let
 
@@ -214,7 +214,7 @@ let
 
   nixosVersion = builtins.substring 0 5 (config.system.nixos.version or config.system.nixosVersion);
 
-  images = import <nixpkgs/nixos/modules/virtualisation/gce-images.nix>;
+  images = import "${modulesPath}/virtualisation/gce-images.nix";
 
 in
 {
